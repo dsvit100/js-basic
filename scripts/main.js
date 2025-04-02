@@ -207,3 +207,51 @@ myInput.addEventListener('keydown', function(e){
     // input박스 안에 있는 값을 출력
     // 연관검색어
 })
+
+
+// 비동기 코드 -------------------------------------
+console.log('hi')
+setTimeout(function(){console.log('1234')}, 1000)
+// 몇 초 이후에 무슨 일을 시킬 때 쓰는 함수 (콜백함수)
+console.log('bye')
+// 위에서 아래로 동작되지만, 동작이 늦게 나오게 설정한 함수(비동기 함수)가 있다면
+// 늦게 나오는 함수를 건너뛰고 다른 함수를 진행하고 그 이후에 비동기 함수 진행행
+
+
+// request -------------------------------------
+// jsonplaceholder
+// 뭔말인지 모르겠음
+const URL = 'https://jsonplaceholder.typicode.com/todos/1'
+
+// 비동기 처리 방법 1 (promise)
+let response = fetch(URL)
+    .then(response => response.json())
+// fetch().then = ~ 하고나서 ()를 해주세요
+    .then(json => console.log(json))
+console.log(response)
+// ......
+
+
+// 비동기 처리 방법 2 (asynd await)
+async function fetchTodo(url) {
+    let res = await fetch(url)
+    // await를 쓰려면 async를 앞에 써야함
+    // 밑의 코드를 실행하기 전에 현재 코드가 진행될 때까지 기다렸다가.
+    let result = await res.json()
+    // return result
+}
+console.log(fetchTodo(URL))
+
+
+
+// li태그를 가진 모든 것들을 가져올것
+let liArray = document.querySelectorAll('li')
+// console.log(liArray)
+
+// li태그 요소를 하나하나 꺼내서 함수 적용
+liArray.forEach(function(item){
+    item.addEventListener('click', function(e){
+        console.log(e.target)
+        // .target 이 이벤트가 발생된 그 엘리먼트
+    })
+})
